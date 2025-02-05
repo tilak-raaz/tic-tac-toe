@@ -26,6 +26,7 @@ boxes.forEach((box) => {
         checkwin();
     })
 })
+ let istie=true
 const checkwin = () => {
     for (let pat of winpat) {
         // console.log(pat[0],pat[1],pat[2])
@@ -33,8 +34,9 @@ const checkwin = () => {
         let val2 = boxes[pat[1]].innerText
         let val3 = boxes[pat[2]].innerText
 
-        if (val1 != '', val2 != '', val3 != '') {
+        if ( val1 !== '' && val2 !== '' && val3 !== '') {
             if (val1 === val2 && val2 === val3) {
+            
                 document.querySelector("h1").innerText = val1 + "  is winner "
                 for (let box of boxes) {
                     box.classList.add("pointer-events-none")
@@ -43,9 +45,27 @@ const checkwin = () => {
                 document.querySelector("#newgame").classList.remove("hidden")
                 reset.classList.add("hidden")
             }
+             
+        }
+         
+    }
+    let isTie = true;
+    for (let box of boxes) {
+        if (box.innerText === "") {
+            isTie = false; // Found an empty box, no tie yet
+            break;
         }
     }
+
+    if (isTie) {
+        document.querySelector("h1").innerText = "It's a Tie!";
+        document.querySelector("h1").classList.remove("hidden");
+        document.querySelector("#newgame").classList.remove("hidden");
+        document.querySelector("#reset").classList.add("hidden");
+    }
 }
+ 
+
 let reset = document.querySelector("#reset")
 reset.addEventListener("click", () => {
     for (let box of boxes) {
@@ -56,6 +76,7 @@ reset.addEventListener("click", () => {
 
     }
 })
+
 document.querySelector("#newgame").addEventListener("click", () => {
     for (let box of boxes) {
         turn = true;
