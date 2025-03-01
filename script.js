@@ -23,11 +23,26 @@ boxes.forEach((box) => {
             turn = true
         }
         box.classList.add("pointer-events-none")
+        let isTie = true;
+        for (let box of boxes) {
+            if (box.innerText === "") {
+                isTie = false; // Found an empty box, no tie yet
+                break;
+            }
+        }
+        
+        if (isTie) {
+            document.querySelector("h1").innerText = "It's a Tie!";
+            document.querySelector("h1").classList.remove("hidden");
+            document.querySelector("#newgame").classList.remove("hidden");
+            document.querySelector("#reset").classList.add("hidden");
+        } 
         checkwin();
     })
 })
  let istie=true
 const checkwin = () => {
+     
     for (let pat of winpat) {
         // console.log(pat[0],pat[1],pat[2])
         let val1 = boxes[pat[0]].innerText
@@ -46,26 +61,18 @@ const checkwin = () => {
                 reset.classList.add("hidden")
             }
              
+
+             
         }
          
     }
-    let isTie = true;
-    for (let box of boxes) {
-        if (box.innerText === "") {
-            isTie = false; // Found an empty box, no tie yet
-            break;
-        }
+     
+
+         
     }
 
-    if (isTie) {
-        document.querySelector("h1").innerText = "It's a Tie!";
-        document.querySelector("h1").classList.remove("hidden");
-        document.querySelector("#newgame").classList.remove("hidden");
-        document.querySelector("#reset").classList.add("hidden");
-    }
-}
- 
-
+    
+    
 let reset = document.querySelector("#reset")
 reset.addEventListener("click", () => {
     for (let box of boxes) {
